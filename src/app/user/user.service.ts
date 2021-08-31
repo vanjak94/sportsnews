@@ -4,7 +4,7 @@ import { ICreateUserDto } from './dtos/create-user.dto';
 import { IUpdateUserDto } from './dtos/update-user.dto';
 
 @Injectable()
-export class NewsArticleService {
+export class UserService {
   constructor(private http: HttpClient) { }
 
   getAll() {
