@@ -1,4 +1,6 @@
+import { NewsArticleFormComponent } from './../news-article-form/news-article-form.component';
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-news-article-form-modal',
@@ -7,9 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NewsArticleFormModalComponent implements OnInit {
 
-  constructor() { }
-
   ngOnInit(): void {
   }
+
+  constructor(public dialog: MatDialog) {}
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(NewsArticleFormComponent, {
+      width: '500px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
 
 }

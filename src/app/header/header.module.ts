@@ -8,6 +8,13 @@ import { UserDropdownComponent } from './user-dropdown/user-dropdown.component';
 import { SearchFormComponent } from './search-form/search-form.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { LoginFormModalComponent } from './login-form-modal/login-form-modal.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatOptionModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
 
 
 
@@ -23,7 +30,20 @@ import { LoginFormModalComponent } from './login-form-modal/login-form-modal.com
     CommonModule,
     UserModule,
     NewsArticleModule,
-    HttpClientModule
-  ]
+    HttpClientModule,
+    MatFormFieldModule,
+    MatButtonModule,
+    MatInputModule,
+    MatOptionModule,
+    MatSelectModule,
+    MatMenuModule,
+    MatIconModule,
+  ],
+  exports: [
+    HeaderComponent
+  ],
+  // bootstrap: [
+  //   HeaderComponent
+  // ]
 })
 export class HeaderModule { }
