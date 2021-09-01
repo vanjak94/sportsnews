@@ -2,19 +2,16 @@
   <mat-icon>person</mat-icon>
 </button>
 <mat-menu #menu="matMenu">
-  <button mat-menu-item disabled>
-    <span>Vanja Krstonosic - user menu</span>
+  <button mat-menu-item disabled *ngIf="isLoggedIn()">
+    <span> {{ currUser?.name }} </span>
   </button>
-  <button mat-menu-item>
-    <mat-icon>dialpad</mat-icon>
-    <span>Redial</span>
-  </button>
-  <button mat-menu-item disabled>
-    <mat-icon>voicemail</mat-icon>
-    <span>Check voice mail</span>
-  </button>
-  <button mat-menu-item>
-    <mat-icon>notifications_off</mat-icon>
-    <span>Disable alerts</span>
+  <a mat-menu-item *ngIf="currUser?.isAdmin" href="/users">
+    <mat-icon>supervised_user_circle</mat-icon>
+    <span>Manage users</span>
+  </a>
+  <app-login-form-modal *ngIf="!isLoggedIn()"></app-login-form-modal>
+  <button mat-menu-item *ngIf="isLoggedIn()" (click)="logOut()">
+    <mat-icon>logout</mat-icon>
+    <span>Log out</span>
   </button>
 </mat-menu>

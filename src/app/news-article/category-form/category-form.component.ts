@@ -1,15 +1,23 @@
+import { NewsArticleService } from './../news-article.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-category-form',
   templateUrl: './category-form.component.html',
-  styleUrls: ['./category-form.component.css']
+  styleUrls: ['./category-form.component.css'],
 })
 export class CategoryFormComponent implements OnInit {
+  constructor(private articleService: NewsArticleService) {}
 
-  constructor() { }
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
+  createNewCategory(category: string) {
+    this.articleService
+      .createCategory({
+        name: category,
+      })
+      .subscribe((data) => {
+        // TODO: close modal
+      });
   }
-
 }

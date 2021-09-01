@@ -1,12 +1,15 @@
 <form>
-  <mat-form-field appearance="fill">
-    <input matInput placeholder="Search news">
+  <mat-form-field>
+    <mat-label>Filter by text</mat-label>
+    <input matInput />
   </mat-form-field>
-  <mat-form-field appearance="fill">
+  <mat-form-field>
+    <mat-label>Filter by category</mat-label>
     <mat-select>
-      <mat-option value="one">First option</mat-option>
-      <mat-option value="two">Second option</mat-option>
+      <mat-option *ngFor="let cat of categories" [value]="cat.name">{{
+        cat.name
+      }}</mat-option>
     </mat-select>
   </mat-form-field>
-  <button mat-button type="submit"> Filter news </button>
+  <button mat-button type="submit">Filter news</button>
 </form>

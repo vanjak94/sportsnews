@@ -1,3 +1,4 @@
+import { HeaderModule } from './../header/header.module';
 import { NewsArticleService } from './news-article.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -15,6 +16,7 @@ import { CategoryFormComponent } from './category-form/category-form.component';
 import { CategoryFormModalComponent } from './category-form-modal/category-form-modal.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   // declarations: [NewsArticleService],
@@ -26,7 +28,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatInputModule,
     MatFormFieldModule,
     MatButtonModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSelectModule,
   ],
   declarations: [
     NewsArticleComponent,
@@ -34,11 +37,9 @@ import { MatDialogModule } from '@angular/material/dialog';
     NewsArticleFormComponent,
     NewsArticleFormModalComponent,
     CategoryFormComponent,
-    CategoryFormModalComponent
+    CategoryFormModalComponent,
   ],
-  providers: [
-    NewsArticleService
-  ]
+  providers: [NewsArticleService],
   // exports: [NewsArticleService],
 })
 export class NewsArticleModule {}

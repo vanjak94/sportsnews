@@ -5,24 +5,20 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-category-form-modal',
   templateUrl: './category-form-modal.component.html',
-  styleUrls: ['./category-form-modal.component.css']
+  styleUrls: ['./category-form-modal.component.css'],
 })
 export class CategoryFormModalComponent implements OnInit {
-
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   constructor(public dialog: MatDialog) {}
 
   openDialog(): void {
     const dialogRef = this.dialog.open(CategoryFormComponent, {
-      width: '500px'
+      width: '500px',
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       console.log('The dialog was closed');
     });
   }
-
-
 }

@@ -1,4 +1,9 @@
 <app-news-article-form-modal></app-news-article-form-modal>
 <app-category-form-modal></app-category-form-modal>
-<app-news-article *ngFor="let article of articles" (click)="redirectToArticle(article)" [article]='article' [isPreview]='true' >
+<app-news-article
+  *ngFor="let article of articles"
+  (click)="redirectToArticle(article)"
+  [article]="article"
+  [isPreview]="true"
+>
 </app-news-article>

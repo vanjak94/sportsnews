@@ -1,3 +1,7 @@
+import { AuthService } from './auth.service';
+import { MatCardModule } from '@angular/material/card';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { UserService } from './user.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -8,11 +12,8 @@ import { UsersListComponent } from './users-list/users-list.component';
 
 @NgModule({
   // declarations: [UserService],
-  imports: [CommonModule, HttpClientModule],
-  declarations: [
-    UserFormComponent,
-    UserFormModalComponent,
-    UsersListComponent
-  ],
+  imports: [CommonModule, HttpClientModule, MatCardModule, MatCheckboxModule],
+  declarations: [UserFormComponent, UserFormModalComponent, UsersListComponent],
+  providers: [UserService, AuthService],
 })
 export class UserModule {}

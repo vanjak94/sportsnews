@@ -7,4 +7,5 @@ export interface INewsArticle {
   createdById: number;
   createdBy: IUser;
   createdAt: Date | string;
+  category: string;
 }

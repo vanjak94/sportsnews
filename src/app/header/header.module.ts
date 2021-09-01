@@ -1,3 +1,4 @@
+import { MatDialogModule } from '@angular/material/dialog';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UserModule } from '../user/user.module';
@@ -6,8 +7,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './header/header.component';
 import { UserDropdownComponent } from './user-dropdown/user-dropdown.component';
 import { SearchFormComponent } from './search-form/search-form.component';
-import { LoginFormComponent } from './login-form/login-form.component';
-import { LoginFormModalComponent } from './login-form-modal/login-form-modal.component';
+import {
+  LoginFormModalComponent,
+  LoginFormComponent,
+} from './login-form-modal/login-form-modal.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
@@ -15,16 +18,15 @@ import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
-
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     HeaderComponent,
     UserDropdownComponent,
     SearchFormComponent,
+    LoginFormModalComponent,
     LoginFormComponent,
-    LoginFormModalComponent
   ],
   imports: [
     CommonModule,
@@ -38,12 +40,13 @@ import { MatIconModule } from '@angular/material/icon';
     MatSelectModule,
     MatMenuModule,
     MatIconModule,
+    MatDialogModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
-  exports: [
-    HeaderComponent
-  ],
+  exports: [HeaderComponent],
   // bootstrap: [
   //   HeaderComponent
   // ]
 })
-export class HeaderModule { }
+export class HeaderModule {}

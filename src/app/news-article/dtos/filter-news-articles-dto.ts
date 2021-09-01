@@ -1,4 +1,4 @@
 export interface IFilterNewsArticlesDto {
-  query: string
-  category: string
+  query: string;
+  category: string;
 }
