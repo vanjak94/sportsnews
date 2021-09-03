@@ -39,7 +39,7 @@ export class AuthService {
   }
 
   getCurrUser(): Observable<IUser | undefined> {
-    if (localStorage.getItem('token')) {
+    if (!localStorage.getItem(TOKEN_KEY)) {
       this.currUser = undefined;
       return of(undefined);
     } else {

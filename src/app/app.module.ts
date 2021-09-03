@@ -1,3 +1,5 @@
+import { AuthInterceptor } from './user/auth.interceptor';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -17,6 +19,7 @@ import { MatOptionModule } from '@angular/material/core';
 @NgModule({
   declarations: [AppComponent],
   imports: [
+    HttpClientModule,
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
@@ -28,13 +31,13 @@ import { MatOptionModule } from '@angular/material/core';
     MatInputModule,
     MatFormFieldModule,
     MatSelectModule,
-    MatOptionModule,
-    // MatToolbarModule,
-    // MatIconModule,
-    // MatSidenavModule,
-    // MatListModule,
+    MatOptionModule
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

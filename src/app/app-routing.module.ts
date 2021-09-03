@@ -1,3 +1,4 @@
+import { AdminGuardService } from './user/admin-guard.service';
 import { UsersListComponent } from './user/users-list/users-list.component';
 import { NewsArticleComponent } from './news-article/news-article/news-article.component';
 import { NgModule } from '@angular/core';
@@ -16,6 +17,7 @@ const routes: Routes = [
   {
     path: 'users',
     component: UsersListComponent,
+    canActivate: [AdminGuardService]
   },
 ];
 
