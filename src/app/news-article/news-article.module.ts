@@ -1,3 +1,4 @@
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderModule } from './../header/header.module';
 import { NewsArticleService } from './news-article.service';
 import { MatButtonModule } from '@angular/material/button';
@@ -10,13 +11,15 @@ import { UserModule } from '../user/user.module';
 import { HttpClientModule } from '@angular/common/http';
 import { NewsArticleComponent } from './news-article/news-article.component';
 import { NewsArticlesListComponent } from './news-articles-list/news-articles-list.component';
-import { NewsArticleFormComponent } from './news-article-form/news-article-form.component';
-import { NewsArticleFormModalComponent } from './news-article-form-modal/news-article-form-modal.component';
-import { CategoryFormComponent } from './category-form/category-form.component';
-import { CategoryFormModalComponent } from './category-form-modal/category-form-modal.component';
+import { NewsArticleFormModalComponent, NewsArticleFormComponent } from './news-article-form-modal/news-article-form-modal.component';
+import {
+  CategoryFormModalComponent,
+  CategoryFormComponent,
+} from './category-form-modal/category-form-modal.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
+import { AngularEditorModule } from '@kolkov/angular-editor';
 
 @NgModule({
   // declarations: [NewsArticleService],
@@ -30,6 +33,9 @@ import { MatSelectModule } from '@angular/material/select';
     MatButtonModule,
     MatDialogModule,
     MatSelectModule,
+    FormsModule,
+    ReactiveFormsModule,
+    AngularEditorModule
   ],
   declarations: [
     NewsArticleComponent,

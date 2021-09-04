@@ -1,5 +1,7 @@
-import { CategoryFormComponent } from './../category-form/category-form.component';
-import { MatDialog } from '@angular/material/dialog';
+import { LoginFormComponent } from './../../header/login-form-modal/login-form-modal.component';
+import { ICreateCategoryDto } from './../dtos/create-category.dto';
+import { NewsArticleService } from './../news-article.service';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -12,6 +14,7 @@ export class CategoryFormModalComponent implements OnInit {
 
   constructor(public dialog: MatDialog) {}
 
+
   openDialog(): void {
     const dialogRef = this.dialog.open(CategoryFormComponent, {
       width: '500px',
@@ -20,5 +23,32 @@ export class CategoryFormModalComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       console.log('The dialog was closed');
     });
+  }
+}
+
+
+@Component({
+  selector: 'app-category-form',
+  templateUrl: './category-form.component.html',
+  styleUrls: ['./category-form.component.css'],
+})
+export class CategoryFormComponent implements OnInit {
+  constructor(private articleService: NewsArticleService,
+
+    public dialogRef: MatDialogRef<LoginFormComponent>) {}
+
+  categoryFormState: ICreateCategoryDto = {
+    name: ''
+  }
+
+  ngOnInit(): void {}
+
+  createNewCategory(data: ICreateCategoryDto) {
+    this.articleService
+      .createCategory(data)
+      .subscribe((data) => {
+        // TODO: close modal
+        this.dialogRef.close()
+      });
   }
 }

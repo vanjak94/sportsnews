@@ -1,0 +1,18 @@
+<form #form="ngForm">
+  <mat-dialog-content>
+    <mat-form-field>
+      <mat-label>Title</mat-label>
+      <input matInput name="title" [(ngModel)]="articleFormData.title"/>
+    </mat-form-field>
+    <angular-editor name="body" [config]="editorConfig" [placeholder]="'Enter text here...'" [(ngModel)]="articleFormData.body"></angular-editor>
+    <mat-form-field>
+      <mat-label>Category</mat-label>
+      <mat-select  name="category" [(ngModel)]="articleFormData.category" >
+        <mat-option *ngFor="let cat of categories" [value]="cat.name">{{
+          cat.name
+        }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-dialog-content>
+  <button mat-button (click)="createArticle(articleFormData)">Save</button>
+</form>
