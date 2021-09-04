@@ -1,4 +1,6 @@
-<mat-card *ngFor="let user of users">
+<app-user-form-modal></app-user-form-modal>
+
+<mat-card *ngFor="let user of users" (click)="openEditUserDialog(user)">
   <mat-card-title>{{ user.name }}</mat-card-title>
   <mat-card-content>
     <mat-checkbox [checked]="user.isActive">Is active</mat-checkbox>

@@ -1,3 +1,4 @@
+import { AuthService } from './../../user/auth.service';
 import { INewsArticle } from './../models/news-article.model';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -11,9 +12,14 @@ import { NewsArticleService } from '../news-article.service';
 export class NewsArticlesListComponent implements OnInit {
   constructor(
     private readonly router: Router,
-    private readonly articlesService: NewsArticleService
+    private readonly articlesService: NewsArticleService,
+    private readonly authService: AuthService
   ) {}
-  public articles?: INewsArticle[];
+  articles?: INewsArticle[];
+
+  get currUser () {
+    return this.authService.currUser
+  }
 
   ngOnInit(): void {
     this.articlesService.getAll().subscribe((data) => {

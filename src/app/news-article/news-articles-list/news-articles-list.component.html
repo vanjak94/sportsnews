@@ -1,5 +1,5 @@
-<app-news-article-form-modal></app-news-article-form-modal>
-<app-category-form-modal></app-category-form-modal>
+<app-news-article-form-modal *ngIf="currUser"></app-news-article-form-modal>
+<app-category-form-modal *ngIf="currUser?.isAdmin"></app-category-form-modal>
 <app-news-article
   *ngFor="let article of articles"
   (click)="redirectToArticle(article)"

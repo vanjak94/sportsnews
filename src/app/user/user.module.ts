@@ -1,3 +1,7 @@
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
 import { AdminGuardService } from './admin-guard.service';
 import { AuthInterceptor } from './auth.interceptor';
 import { AuthService } from './auth.service';
@@ -8,12 +12,29 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { HttpClientModule } from '@angular/common/http';
-import { UserFormComponent } from './user-form/user-form.component';
-import { UserFormModalComponent } from './user-form-modal/user-form-modal.component';
+import {
+  UserFormModalComponent,
+  UserFormComponent,
+} from './user-form-modal/user-form-modal.component';
 import { UsersListComponent } from './users-list/users-list.component';
- @NgModule({
-  imports: [CommonModule, HttpClientModule, MatCardModule, MatCheckboxModule],
+import { MatInputModule } from '@angular/material/input';
+import {  MatButtonModule } from '@angular/material/button';
+
+@NgModule({
+  imports: [
+    CommonModule,
+    HttpClientModule,
+    MatCardModule,
+    MatCheckboxModule,
+    MatIconModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDialogModule,
+    MatButtonModule
+  ],
   declarations: [UserFormComponent, UserFormModalComponent, UsersListComponent],
-  providers: [UserService, AuthService, AdminGuardService, AuthInterceptor]
+  providers: [UserService, AuthService, AdminGuardService, AuthInterceptor],
 })
 export class UserModule {}
