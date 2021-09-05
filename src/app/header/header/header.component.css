@@ -1,5 +1,12 @@
 :host {
+  margin: 5px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+
+:host > a {
+  text-decoration: none;
+  color: black;
+  font-family: Roboto;
 }

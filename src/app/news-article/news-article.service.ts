@@ -88,6 +88,11 @@ export class NewsArticleService {
     });
   }
 
+  filter(data: IFilterNewsArticlesDto) {
+    console.log(data)
+    // TODO: nekako pogodi subject neki
+  }
+
   getByFilter(data: IFilterNewsArticlesDto) {
     return of([
       {

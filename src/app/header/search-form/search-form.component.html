@@ -1,15 +1,15 @@
-<form>
+<form #form="ngForm" >
   <mat-form-field>
     <mat-label>Filter by text</mat-label>
-    <input matInput />
+    <input matInput name="query" [(ngModel)]="searchFormData.query" />
   </mat-form-field>
   <mat-form-field>
     <mat-label>Filter by category</mat-label>
-    <mat-select>
+    <mat-select name="category" [(ngModel)]="searchFormData.category">
       <mat-option *ngFor="let cat of categories" [value]="cat.name">{{
         cat.name
       }}</mat-option>
     </mat-select>
   </mat-form-field>
-  <button mat-button type="submit">Filter news</button>
+  <button mat-raised-button color="primary" (click)="submit(searchFormData)" >Filter news</button>
 </form>

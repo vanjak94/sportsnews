@@ -2,6 +2,7 @@ import { NewsArticleService } from './../news-article.service';
 import { INewsArticle } from './../models/news-article.model';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { formatDate } from '../../utils/helpers';
 
 @Component({
   selector: 'app-news-article',
@@ -24,5 +25,10 @@ export class NewsArticleComponent implements OnInit {
         this.article = article;
       });
     });
+  }
+
+  formatDate(date: Date | string
+    | undefined) {
+    return formatDate(date)
   }
 }

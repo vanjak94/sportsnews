@@ -1,14 +1,12 @@
-<mat-card>
+<mat-card class="news-article-card">
   <mat-card-title>
     {{ article?.title }}
   </mat-card-title>
   <mat-card-content>
     {{ article?.body }}
+    <div class="metadata-wrapper">
+      <p>{{ formatDate(article?.createdAt) }}</p>
+      <p>by {{ article?.createdBy?.name }}</p>
+    </div>
   </mat-card-content>
-  <mat-card-footer>
-    <div>{{ article?.createdAt }}</div>
-    <!-- ovde ide user info -->
-    <div>by {{ article?.createdBy?.name }}</div>
-    <!-- ovde ide user info -->
-  </mat-card-footer>
 </mat-card>

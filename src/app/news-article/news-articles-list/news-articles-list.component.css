@@ -1,0 +1,8 @@
+:host > .button-wrapper {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+:host > .button-wrapper > * {
+  margin-right: 10px;
+}

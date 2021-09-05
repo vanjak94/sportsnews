@@ -1,0 +1,9 @@
+
+:host .user-card {
+  margin: 10px;
+}
+
+:host .user-card-content {
+  display: flex;
+  flex-direction: column;
+}
