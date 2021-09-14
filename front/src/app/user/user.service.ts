@@ -13,6 +13,7 @@ export class UserService {
       {
         id: 44,
         name: 'Vanja Krstonosic',
+        username: 'foo',
         isAdmin: true,
         isActive: true,
       },
@@ -20,11 +21,13 @@ export class UserService {
         id: 11,
         name: 'Banja KK',
         isAdmin: true,
+        username: 'foo',
         isActive: true,
       },
       {
         id: 33,
         name: 'Aiko Matic',
+        username: 'foo',
         isAdmin: true,
         isActive: true,
       },
@@ -35,6 +38,7 @@ export class UserService {
     return of<IUser>({
       id,
       name: 'Vanja Krstonosic',
+      username: 'foo',
       isAdmin: true,
       isActive: true,
     });
@@ -43,6 +47,7 @@ export class UserService {
   create(data: ICreateUpdateUserDto) {
     return of<IUser>({
       id: 111,
+      username: 'foo',
       name: data.name as string,
       isAdmin: data.isAdmin as boolean,
       isActive: true,
@@ -52,6 +57,7 @@ export class UserService {
   update(data: ICreateUpdateUserDto) {
     return of<IUser>({
       id: 111,
+      username: 'foo',
       name: data.name as string,
       isAdmin: !!data.isAdmin,
       isActive: !!data.isActive,

@@ -45,6 +45,7 @@ export class AuthService {
     } else {
       this.currUser = {
         id: 44,
+        username: 'foo',
         name: 'Vanja Krstonosic',
         isAdmin: true,
         isActive: true,

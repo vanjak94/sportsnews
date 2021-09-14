@@ -18,6 +18,7 @@ export class NewsArticleService {
         createdBy: {
           id: 4,
           name: 'Autor vesti',
+          username: 'foo',
           isAdmin: false,
           isActive: true,
         },
@@ -31,6 +32,7 @@ export class NewsArticleService {
         body: 'Content vesti content vesti content vesti',
         createdBy: {
           id: 4,
+          username: 'foo',
           name: 'Autor vesti',
           isAdmin: false,
           isActive: true,
@@ -45,6 +47,7 @@ export class NewsArticleService {
         body: 'Content vesti content vesti content vesti',
         createdBy: {
           id: 4,
+          username: 'foo',
           name: 'Autor vesti',
           isAdmin: false,
           isActive: true,
@@ -59,6 +62,7 @@ export class NewsArticleService {
         body: 'Content vesti content vesti content vesti',
         createdBy: {
           id: 4,
+          username: 'foo',
           name: 'Autor vesti',
           isAdmin: false,
           isActive: true,
@@ -78,6 +82,7 @@ export class NewsArticleService {
       createdBy: {
         id: 4,
         name: 'Autor vesti',
+        username: 'foo',
         isAdmin: false,
         isActive: true,
       },
