@@ -39,8 +39,9 @@ public class TokenUtils {
 
 	public String getUsername(String token) {
 		String username = null;
+
 		try {
-			return getClaims(token).getSubject();
+			username = Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody().getSubject();
 		} catch (Exception e) {
 		}
 
@@ -53,11 +54,12 @@ public class TokenUtils {
 	}
 
 	public String generateToken(UserDetails userDetails) {
-		Map<String, Object> claims = new HashMap<String, Object>();
-		claims.put("sub", userDetails.getUsername());
-		claims.put("created", new Date(System.currentTimeMillis()));
+		String token = Jwts.builder()
+			.setSubject(userDetails.getUsername())
+			.setIssuedAt(new Date())
+			.setExpiration(new Date(System.currentTimeMillis() + expiration * 1000))
+			.signWith(SignatureAlgorithm.HS512, secret).compact();
 
-		return Jwts.builder().setClaims(claims).setExpiration(new Date(System.currentTimeMillis() + expiration * 1000))
-				.signWith(SignatureAlgorithm.HS512, secret).compact();
+		return token;
 	}
 }

@@ -1,8 +1,5 @@
 package com.vanjakrstonosic.app.service;
 
-
-import java.util.ArrayList;
-
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,12 +29,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 			throw new UsernameNotFoundException(username);
 		}
 
-		User.UserBuilder userBuilder = org.springframework.security.core.userdetails.User.withUsername(username).password(user.getPassword());
+		User.UserBuilder userBuilder = User.withUsername(username).password(user.getPassword());
 
 		if (user.isAdmin()) {
-			userBuilder = userBuilder.authorities("USER", "ADMIN");
+			userBuilder = userBuilder.roles("USER", "ADMIN");
 		} else {
-			userBuilder = userBuilder.authorities("USER");
+			userBuilder = userBuilder.roles("USER");
 		}
 
 		return userBuilder.build();

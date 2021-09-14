@@ -35,7 +35,7 @@ public class AuthenticationTokenFilter extends UsernamePasswordAuthenticationFil
 		// Dobavljanje korisnickog imena iz tokena.
 		String username = tokenUtils.getUsername(authToken);
 
-		if ((username != null) && (SecurityContextHolder.getContext().getAuthentication() == null)) {
+		if (username != null) {
 			// Dobavljanje userDetails objekta po korisnickom imenu.
 			UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 			// Validacija tokena.
@@ -44,6 +44,7 @@ public class AuthenticationTokenFilter extends UsernamePasswordAuthenticationFil
 				// security context.
 				UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
 						userDetails, null, userDetails.getAuthorities());
+
 				authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(httpRequest));
 				SecurityContextHolder.getContext().setAuthentication(authentication);
 			}

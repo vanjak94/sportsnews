@@ -16,6 +16,7 @@ import com.vanjakrstonosic.app.repository.UserRepository;
 import com.vanjakrstonosic.app.service.UserService;
 import com.vanjakrstonosic.app.utils.TokenUtils;
 import com.vanjakrstonosic.app.dto.LoginDTO;
+import com.vanjakrstonosic.app.dto.TokenDTO;
 
 @Controller
 @RequestMapping("/api")
@@ -34,12 +35,12 @@ public class LoginController {
 	UserRepository userRepository;
 
 	@RequestMapping(path = "/login", method = RequestMethod.POST)
-	public ResponseEntity<String> login(@RequestBody LoginDTO loginDTO) {
+	public ResponseEntity<TokenDTO> login(@RequestBody LoginDTO loginDTO) throws Exception {
 
 		UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(loginDTO.getUsername(), loginDTO.getPassword());
 		UserDetails details = userDetailsService.loadUserByUsername(loginDTO.getUsername());
 
-		return new ResponseEntity<String>(tokenUtils.generateToken(details), HttpStatus.OK);
+		return new ResponseEntity<TokenDTO>(new TokenDTO(tokenUtils.generateToken(details)), HttpStatus.OK);
 	}
 
 

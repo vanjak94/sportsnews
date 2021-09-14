@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class NewsArticle {
@@ -12,17 +14,17 @@ public class NewsArticle {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(nullable = false, unique = true)
+	@Column(nullable = false)
 	private String title;
 	@Column(nullable = false)
 	private String body;
-	@Column(nullable = false)
+	@Column(nullable = false, insertable = false, updatable = false)
 	private Long createdById;
-	// @Column(nullable = false)
-	// TODO inject
+	@ManyToOne
+	@JoinColumn(name = "createdById")
 	private User createdBy;
 	@Column(nullable = false)
-	private String category; // TODO: foreign key
+	private String category;
 
 	public NewsArticle() {
 		super();

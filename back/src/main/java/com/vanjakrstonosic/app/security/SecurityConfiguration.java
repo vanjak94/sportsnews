@@ -15,32 +15,18 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(securedEnabled = true)
+@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Autowired
 	UserDetailsService userDetailsService;
 
-	@Bean
-	public PasswordEncoder getPasswordEncoder() {
-		Map<String, PasswordEncoder> encoders = new HashMap<String, PasswordEncoder>();
-		encoders.put("bcrypt", new BCryptPasswordEncoder());
-
-		DelegatingPasswordEncoder passwordEncoder = new DelegatingPasswordEncoder("bcrypt", encoders);
-		passwordEncoder.setDefaultPasswordEncoderForMatches(encoders.get("bcrypt"));
-
-		return passwordEncoder;
-	}
-
 	@Autowired
 	public void configureAuthentication(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
-		authenticationManagerBuilder.userDetailsService(userDetailsService).passwordEncoder(getPasswordEncoder()).and().jdbcAuthentication();
+		authenticationManagerBuilder.userDetailsService(userDetailsService);
 	}
 
 	@Bean
@@ -56,23 +42,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		return authenticationTokenFilter;
 	}
 
-	//
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-		http.authorizeRequests()
-			// usere dodaju i listaju samo admini
-			.antMatchers("/api/users").hasRole("ADMIN")
-			// svaki user moze da vidi svoje podatke
-			.antMatchers("/api/users/me").hasAnyRole("ADMIN", "USER")
-			// svi mogu da vide koje kategorije imaju
-			.antMatchers(HttpMethod.GET, "/categories").permitAll()
-			// a samo ulogovani ih menjaju
-			.antMatchers(HttpMethod.POST, "/categories").hasAnyRole("ADMIN", "USER")
-			// isto i za clanke
-			.antMatchers(HttpMethod.GET, "/news-articles/**").permitAll()
-			.antMatchers(HttpMethod.POST, "/news-articles").hasAnyRole("ADMIN", "USER");
-		http.addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
-		http.csrf().disable();
+		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().exceptionHandling().and()
+				.addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class).csrf().disable();
 	}
 }

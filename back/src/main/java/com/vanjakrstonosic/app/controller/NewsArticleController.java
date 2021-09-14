@@ -6,34 +6,36 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.config.annotation.authentication.configuration.EnableGlobalAuthentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.vanjakrstonosic.app.dto.NewsArticleDTO;
 import com.vanjakrstonosic.app.dto.UserDTO;
-import com.vanjakrstonosic.app.dto.NewsArticleDTO;
 import com.vanjakrstonosic.app.model.NewsArticle;
 import com.vanjakrstonosic.app.model.User;
 import com.vanjakrstonosic.app.service.NewsArticleService;
 import com.vanjakrstonosic.app.service.UserService;
 
 @Controller
-@RequestMapping(path = "/api/news-articles")
+@RequestMapping("/api/news-articles")
 public class NewsArticleController {
 	@Autowired
 	NewsArticleService newsArticleService;
 	@Autowired
 	UserService userService;
 
-	@GetMapping(value = "/filter")
+	@GetMapping("/filter")
 	public ResponseEntity<List<NewsArticleDTO>> findByFilter(@RequestParam(required = false) String query, @RequestParam(required = false) String category) {
 		if (query == null) {
 			query = "";
@@ -51,7 +53,7 @@ public class NewsArticleController {
 		return new ResponseEntity<List<NewsArticleDTO>>(newsArticleDtos, HttpStatus.OK);
 	}
 
-	@GetMapping(value = "/")
+	@GetMapping("")
 	public ResponseEntity<List<NewsArticleDTO>> findAll() {
 		List<NewsArticle> newsArticles = newsArticleService.findAll();
 		List<NewsArticleDTO> newsArticleDtos = new ArrayList<>();
@@ -63,7 +65,7 @@ public class NewsArticleController {
 		return new ResponseEntity<List<NewsArticleDTO>>(newsArticleDtos, HttpStatus.OK);
 	}
 
-	@GetMapping(value="/{id}")
+	@GetMapping("/{id}")
 	public ResponseEntity<NewsArticleDTO> findOne(@PathVariable("id") Long id) {
 		NewsArticle article = newsArticleService.findOne(id);
 
@@ -76,25 +78,17 @@ public class NewsArticleController {
 		return new ResponseEntity<NewsArticleDTO>(new NewsArticleDTO(article, new UserDTO(createdBy)), HttpStatus.OK);
 	}
 
-	@PostMapping(value="/")
-	public ResponseEntity<NewsArticleDTO> saveUser(@RequestBody NewsArticleDTO NewsArticleDTO) {
+	@PostMapping("")
+	@PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+	public ResponseEntity<NewsArticleDTO> saveArticle(@RequestBody NewsArticleDTO NewsArticleDTO, @AuthenticationPrincipal() Object principal) {
 		NewsArticle newsArticle = new NewsArticle();
 
 		newsArticle.setTitle(NewsArticleDTO.getTitle());
 		newsArticle.setBody(NewsArticleDTO.getBody());
 		newsArticle.setCategory(NewsArticleDTO.getCategory());
 
-		// Dovuci detalje trenutno ulogovanog korisnika
-		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-		String username;
-		if (principal instanceof UserDetails) {
-			username = ((UserDetails)principal).getUsername();
-		} else {
-			username = principal.toString();
-		}
-		User createdBy = this.userService.findByUsername(username);
-		newsArticle.setCreatedById(createdBy.getId());
+		User createdBy = this.userService.findByUsername(((UserDetails)principal).getUsername());
+		newsArticle.setCreatedBy(createdBy);
 
 		newsArticle = newsArticleService.save(newsArticle);
 
