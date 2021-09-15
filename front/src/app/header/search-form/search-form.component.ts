@@ -24,6 +24,14 @@ export class SearchFormComponent implements OnInit {
     });
   }
 
+  resetFilters() {
+    this.searchFormData = {
+      query: "",
+      category: ""
+    }
+    this.submit(this.searchFormData)
+  }
+
   submit(data: IFilterNewsArticlesDto) {
     this.articlesService.filter(data)
   }

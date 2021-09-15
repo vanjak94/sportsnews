@@ -4,6 +4,7 @@ import { ICreateUpdateUserDto } from './dtos/create-update-user.dto';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { config } from '../../config';
+import { map } from 'rxjs/operators';
 
 const routes = {
   users: `${config.backendUrl}/api/users`,
@@ -27,22 +28,26 @@ export class UserService {
   }
 
   create(data: ICreateUpdateUserDto) {
-    const observable = this.http.post<IUser>(routes.users, data);
-    observable.subscribe((user) => {
-      this.refetchUsers();
-    });
-    return observable;
+    return this.http.post<IUser>(routes.users, data).pipe(
+      map((data) => {
+        this.refetchUsers();
+        return data;
+      })
+    );
   }
 
   update(data: ICreateUpdateUserDto) {
-    const observable = this.http.put<IUser>(
-      routes.userById.replace(':id', data.id as unknown as string),
-      data
-    );
-    observable.subscribe((user) => {
-      this.refetchUsers();
-    });
-    return observable;
+    return this.http
+      .post<IUser>(
+        routes.userById.replace(':id', data.id as unknown as string),
+        data
+      )
+      .pipe(
+        map((data) => {
+          this.refetchUsers();
+          return data;
+        })
+      );
   }
 
   refetchUsers() {

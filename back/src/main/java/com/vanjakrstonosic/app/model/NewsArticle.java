@@ -18,7 +18,7 @@ public class NewsArticle {
 
 	@Column(nullable = false)
 	private String title;
-	@Column(nullable = false)
+	@Column(nullable = false, columnDefinition = "text")
 	private String body;
 	@Column(nullable = false, insertable = false, updatable = false)
 	private Long createdById;

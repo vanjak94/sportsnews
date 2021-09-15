@@ -3,5 +3,5 @@
     <mat-label>Category name</mat-label>
     <input matInput name="name" [(ngModel)]="categoryFormState.name" required/>
   </mat-form-field>
-  <button mat-button type="submit" (click)="createNewCategory(categoryFormState)">Create new category</button>
+  <button mat-raised-button color="primary" [disabled]="isFormInvalid()" type="submit" (click)="createNewCategory(categoryFormState)">Create new category</button>
 </form>

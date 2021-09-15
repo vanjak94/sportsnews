@@ -15,5 +15,5 @@
     <mat-checkbox name="isAdmin" [(ngModel)]="userFormData.isAdmin">is admin</mat-checkbox>
     <mat-checkbox name="isActive" [(ngModel)]="userFormData.isActive">is active</mat-checkbox>
   </mat-dialog-content>
-  <button mat-button (click)="createOrUpdateUser(userFormData)">Save</button>
+  <button [disabled]="isFormInvalid()" mat-raised-button color="primary" (click)="createOrUpdateUser(userFormData)">Save</button>
 </form>

@@ -25,26 +25,31 @@ export class NewsArticleFormModalComponent implements OnInit {
   }
 }
 
-
 @Component({
   selector: 'app-news-article-form',
   templateUrl: './news-article-form.component.html',
   styleUrls: ['./news-article-form.component.css'],
 })
 export class NewsArticleFormComponent implements OnInit {
-  constructor(private articleService: NewsArticleService,
+  constructor(
+    private articleService: NewsArticleService,
     private dialogRef: MatDialogRef<NewsArticleFormComponent>
-    ) {}
+  ) {}
 
   categories?: ICategory[];
   articleFormData: ICreateNewsArticleDto = {
     title: '',
     body: '',
-    category: ''
-  }
+    category: '',
+  };
   editorConfig = {
     editable: true,
-    minHeight: '150px'
+    minHeight: '150px',
+    toolbarHiddenButtons: [[], ['insertImage', 'insertVideo']],
+  };
+
+  isFormInvalid() {
+    return this.articleFormData.title === "" || this.articleFormData.body === "" || this.articleFormData.category === "";
   }
 
   ngOnInit(): void {
@@ -54,11 +59,9 @@ export class NewsArticleFormComponent implements OnInit {
   }
 
   createArticle(data: ICreateNewsArticleDto) {
-    console.log(this.articleFormData)
-    this.articleService.create(data).subscribe(
-      data => {
-        this.dialogRef.close()
-      }
-    )
+    console.log(this.articleFormData);
+    this.articleService.create(data).subscribe((data) => {
+      this.dialogRef.close();
+    });
   }
 }

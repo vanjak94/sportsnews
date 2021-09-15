@@ -11,3 +11,10 @@
   margin: 5px 10px 0px 0px;
   font-style: italic;
 }
+
+:host .angular-editor-textarea {
+  border: none;
+  outline: none;
+  resize: none;
+  padding: 0;
+}

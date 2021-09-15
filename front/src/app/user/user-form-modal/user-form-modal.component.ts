@@ -50,6 +50,14 @@ export class UserFormComponent implements OnInit {
     };
   }
 
+  isFormInvalid() {
+    return (
+      this.userFormData.name === '' ||
+      this.userFormData.username === '' ||
+      (!this.userFormData.id && this.userFormData.password === '')
+    );
+  }
+
   userFormData: ICreateUpdateUserDto;
 
   createOrUpdateUser(data: ICreateUpdateUserDto) {

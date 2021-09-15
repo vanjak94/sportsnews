@@ -10,13 +10,21 @@ import { formatDate } from '../../utils/helpers';
   styleUrls: ['./news-article.component.css'],
 })
 export class NewsArticleComponent implements OnInit {
-  @Input() article?: INewsArticle;
+  @Input() article: INewsArticle = {} as INewsArticle;
   @Input() isPreview?: boolean;
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private articleService: NewsArticleService
   ) {}
+
+
+  editorConfig = {
+    editable: false,
+    enableToolbar: false,
+    showToolbar: false,
+    outline: false
+  };
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params) => {

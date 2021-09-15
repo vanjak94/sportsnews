@@ -1,6 +1,6 @@
 <form #form="ngForm" >
   <mat-form-field>
-    <mat-label>Filter by text</mat-label>
+    <mat-label>Filter by keyword</mat-label>
     <input matInput name="query" [(ngModel)]="searchFormData.query" />
   </mat-form-field>
   <mat-form-field>
@@ -12,4 +12,5 @@
     </mat-select>
   </mat-form-field>
   <button mat-raised-button color="primary" (click)="submit(searchFormData)" >Filter news</button>
+  <button mat-raised-button color="primary" (click)="resetFilters()" >Reset filters</button>
 </form>

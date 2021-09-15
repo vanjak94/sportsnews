@@ -3,8 +3,9 @@
     {{ article?.title }}
   </mat-card-title>
   <mat-card-content>
-    {{ article?.body }}
+    <angular-editor class="news-article-card-body" [config]="editorConfig" [(ngModel)]="article.body"></angular-editor>
     <div class="metadata-wrapper">
+      <p><b>category: {{ article?.category }}</b></p>
       <p>{{ formatDate(article?.createdAt) }}</p>
       <p>by {{ article?.createdBy?.name }}</p>
     </div>

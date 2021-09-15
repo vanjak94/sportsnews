@@ -41,9 +41,14 @@ export class CategoryFormComponent implements OnInit {
     name: ''
   }
 
-  ngOnInit(): void {}
+  ngOnInit() {}
+
+  isFormInvalid() {
+    return this.categoryFormState.name === "";
+  }
 
   createNewCategory(data: ICreateCategoryDto) {
+    console.log('button callback')
     this.articleService
       .createCategory(data)
       .subscribe((data) => {

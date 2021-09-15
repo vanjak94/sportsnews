@@ -18,12 +18,12 @@ import com.vanjakrstonosic.app.model.Category;
 import com.vanjakrstonosic.app.service.CategoryService;
 
 @Controller
-@RequestMapping(path = "/api/category")
+@RequestMapping(path = "/api/categories")
 public class CategoryController {
 	@Autowired
 	CategoryService categoryService;
 
-	@GetMapping(path = "/")
+	@GetMapping(path = "")
 	public ResponseEntity<List<CategoryDTO>> findAll() {
 		List<Category> categories = categoryService.findAll();
 		List<CategoryDTO> categoriesDTO = new ArrayList<>();
@@ -34,7 +34,7 @@ public class CategoryController {
 
 	}
 
-	@PostMapping(path = "/")
+	@PostMapping(path = "")
 	@PreAuthorize("hasAnyRole('ADMIN', 'USER')")
 	public ResponseEntity<CategoryDTO> saveCategory(@RequestBody CategoryDTO categoryDTO) {
 		Category category = new Category();

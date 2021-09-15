@@ -36,8 +36,9 @@ public class NewsArticleController {
 	@Autowired
 	UserService userService;
 
-	@GetMapping("/filter")
-	public ResponseEntity<List<NewsArticleDTO>> findByFilter(@RequestParam(required = false) String query, @RequestParam(required = false) String category) {
+	@GetMapping("")
+	public ResponseEntity<List<NewsArticleDTO>> findByFilter(@RequestParam(required = false) String query,
+			@RequestParam(required = false) String category) {
 		if (query == null) {
 			query = "";
 		}
@@ -46,19 +47,7 @@ public class NewsArticleController {
 		}
 		List<NewsArticle> newsArticles = newsArticleService.findByFilter(category, query);
 		List<NewsArticleDTO> newsArticleDtos = new ArrayList<>();
-		for(NewsArticle newsArticle : newsArticles) {
-			User createdBy = this.userService.findOne(newsArticle.getCreatedById());
-			NewsArticleDTO dto = new NewsArticleDTO(newsArticle, new UserDTO(createdBy));
-			newsArticleDtos.add(dto);
-		}
-		return new ResponseEntity<List<NewsArticleDTO>>(newsArticleDtos, HttpStatus.OK);
-	}
-
-	@GetMapping("")
-	public ResponseEntity<List<NewsArticleDTO>> findAll() {
-		List<NewsArticle> newsArticles = newsArticleService.findAll();
-		List<NewsArticleDTO> newsArticleDtos = new ArrayList<>();
-		for(NewsArticle newsArticle : newsArticles) {
+		for (NewsArticle newsArticle : newsArticles) {
 			User createdBy = this.userService.findOne(newsArticle.getCreatedById());
 			NewsArticleDTO dto = new NewsArticleDTO(newsArticle, new UserDTO(createdBy));
 			newsArticleDtos.add(dto);
@@ -70,7 +59,7 @@ public class NewsArticleController {
 	public ResponseEntity<NewsArticleDTO> findOne(@PathVariable("id") Long id) {
 		NewsArticle article = newsArticleService.findOne(id);
 
-		if(article == null) {
+		if (article == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 
@@ -81,7 +70,8 @@ public class NewsArticleController {
 
 	@PostMapping("")
 	@PreAuthorize("hasAnyRole('ADMIN', 'USER')")
-	public ResponseEntity<NewsArticleDTO> saveArticle(@RequestBody NewsArticleDTO NewsArticleDTO, @AuthenticationPrincipal() Object principal) {
+	public ResponseEntity<NewsArticleDTO> saveArticle(@RequestBody NewsArticleDTO NewsArticleDTO,
+			@AuthenticationPrincipal() Object principal) {
 		NewsArticle newsArticle = new NewsArticle();
 
 		newsArticle.setTitle(NewsArticleDTO.getTitle());
@@ -89,7 +79,7 @@ public class NewsArticleController {
 		newsArticle.setCategory(NewsArticleDTO.getCategory());
 		newsArticle.setCreatedAt(new Date());
 
-		User createdBy = this.userService.findByUsername(((UserDetails)principal).getUsername());
+		User createdBy = this.userService.findByUsername(((UserDetails) principal).getUsername());
 		newsArticle.setCreatedBy(createdBy);
 
 		newsArticle = newsArticleService.save(newsArticle);
