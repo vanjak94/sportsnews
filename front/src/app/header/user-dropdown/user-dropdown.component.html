@@ -5,7 +5,12 @@
   <button mat-menu-item disabled *ngIf="isLoggedIn()">
     <span> {{ currUser?.name }} </span>
   </button>
-  <a mat-menu-item *ngIf="currUser?.isAdmin" href="/users">
+  <a
+    mat-menu-item
+    *ngIf="currUser?.isAdmin"
+    [routerLink]="['/users']"
+    routerLinkActive="router-link-active"
+  >
     <mat-icon>supervised_user_circle</mat-icon>
     <span>Manage users</span>
   </a>

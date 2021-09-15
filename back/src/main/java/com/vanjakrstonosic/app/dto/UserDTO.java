@@ -5,8 +5,10 @@ import com.vanjakrstonosic.app.model.User;
 public class UserDTO {
 	private Long id;
 	private String username;
+	private String password;
 	private String name;
 	private boolean isAdmin;
+	private boolean isActive;
 
 	public Long getId() {
 		return id;
@@ -24,6 +26,14 @@ public class UserDTO {
 		this.username = username;
 	}
 
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -32,12 +42,20 @@ public class UserDTO {
 		this.name = name;
 	}
 
-	public boolean isAdmin() {
+	public boolean getIsAdmin() {
 		return isAdmin;
 	}
 
-	public void setAdmin(boolean isAdmin) {
+	public void setIsAdmin(boolean isAdmin) {
 		this.isAdmin = isAdmin;
+	}
+
+	public boolean getIsActive() {
+		return isActive;
+	}
+
+	public void setIsActive(boolean isActive) {
+		this.isActive = isActive;
 	}
 
 	public UserDTO() {
@@ -48,7 +66,8 @@ public class UserDTO {
 		this.id = user.getId();
 		this.username = user.getUsername();
 		this.name = user.getName();
-		this.isAdmin = user.isAdmin();
+		this.isAdmin = user.getIsAdmin();
+		this.isActive = user.getIsActive();
 	}
 
 }

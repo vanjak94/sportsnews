@@ -1,5 +1,7 @@
 package com.vanjakrstonosic.app.dto;
 
+import java.util.Date;
+
 import com.vanjakrstonosic.app.model.NewsArticle;
 
 public class NewsArticleDTO {
@@ -10,6 +12,7 @@ public class NewsArticleDTO {
 	private Long createdById;
 	private UserDTO createdBy;
 	private String category;
+	private Date createdAt;
 
 	public NewsArticleDTO() {
 		super();
@@ -23,6 +26,7 @@ public class NewsArticleDTO {
 		this.createdById = newsArticle.getCreatedById();
 		this.createdBy = createdBy;
 		this.category = newsArticle.getCategory();
+		this.createdAt = newsArticle.getCreatedAt();
 	}
 
 	public Long getId() {
@@ -71,5 +75,13 @@ public class NewsArticleDTO {
 
 	public void setCategory(String category) {
 		this.category = category;
+	}
+
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
 	}
 }

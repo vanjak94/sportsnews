@@ -1,5 +1,5 @@
 import { ICreateNewsArticleDto } from './../dtos/create-news-article.dto';
-import { ICategoryModel } from './../models/category.model';
+import { ICategory } from './../models/category.model';
 import { NewsArticleService } from './../news-article.service';
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef, MatDialog } from '@angular/material/dialog';
@@ -36,7 +36,7 @@ export class NewsArticleFormComponent implements OnInit {
     private dialogRef: MatDialogRef<NewsArticleFormComponent>
     ) {}
 
-  categories?: ICategoryModel[];
+  categories?: ICategory[];
   articleFormData: ICreateNewsArticleDto = {
     title: '',
     body: '',

@@ -43,10 +43,11 @@ export class LoginFormComponent implements OnInit {
     password: '',
   };
 
-  logIn(data: ILogInDto) {
-    console.log(data);
-    this.authService.logIn(data).subscribe((data) => {
-      this.dialogRef.close();
+  async logIn(data: ILogInDto) {
+    (await this.authService.logIn(data)).subscribe((data) => {
+      if (data) {
+        this.dialogRef.close();
+      }
     });
   }
 }

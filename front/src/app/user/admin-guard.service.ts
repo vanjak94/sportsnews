@@ -10,7 +10,6 @@ export class AdminGuardService implements CanActivate {
     const currUser = this.auth.currUser;
 
     if (!currUser?.isAdmin) {
-      this.router.navigateByUrl('/');
       return false;
     }
     return true;

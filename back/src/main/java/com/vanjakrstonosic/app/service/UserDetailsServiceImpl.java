@@ -31,7 +31,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
 		User.UserBuilder userBuilder = User.withUsername(username).password(user.getPassword());
 
-		if (user.isAdmin()) {
+		if (user.getIsAdmin()) {
 			userBuilder = userBuilder.roles("USER", "ADMIN");
 		} else {
 			userBuilder = userBuilder.roles("USER");

@@ -1,6 +1,7 @@
 package com.vanjakrstonosic.app.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,6 +87,7 @@ public class NewsArticleController {
 		newsArticle.setTitle(NewsArticleDTO.getTitle());
 		newsArticle.setBody(NewsArticleDTO.getBody());
 		newsArticle.setCategory(NewsArticleDTO.getCategory());
+		newsArticle.setCreatedAt(new Date());
 
 		User createdBy = this.userService.findByUsername(((UserDetails)principal).getUsername());
 		newsArticle.setCreatedBy(createdBy);

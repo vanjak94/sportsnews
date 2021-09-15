@@ -63,7 +63,9 @@ public class UserController {
 	public ResponseEntity<UserDTO> saveUser(@RequestBody UserDTO userDTO) {
 		User user = new User();
 
-		user.setAdmin(userDTO.isAdmin());
+		user.setIsAdmin(userDTO.getIsAdmin());
+		user.setIsActive(userDTO.getIsActive());
+		user.setPassword(userDTO.getPassword());
 		user.setName(userDTO.getName());
 		user.setUsername(userDTO.getUsername());
 
@@ -76,7 +78,8 @@ public class UserController {
 	public ResponseEntity<UserDTO> saveUser(@PathVariable("id") Long id, @RequestBody UserDTO userDTO) {
 		User user = userService.findOne(id);
 
-		user.setAdmin(userDTO.isAdmin());
+		user.setIsAdmin(userDTO.getIsAdmin());
+		user.setIsActive(userDTO.getIsActive());
 		user.setName(userDTO.getName());
 		user.setUsername(userDTO.getUsername());
 

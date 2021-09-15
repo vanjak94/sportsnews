@@ -1,5 +1,7 @@
 package com.vanjakrstonosic.app.model;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,12 +27,14 @@ public class NewsArticle {
 	private User createdBy;
 	@Column(nullable = false)
 	private String category;
+	@Column(nullable = false)
+	private Date createdAt;
 
 	public NewsArticle() {
 		super();
 	}
 
-	public NewsArticle(Long id, String title, String body, Long createdById, User createdBy, String category) {
+	public NewsArticle(Long id, String title, String body, Long createdById, User createdBy, String category, Date createdAt) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -38,6 +42,7 @@ public class NewsArticle {
 		this.createdById = createdById;
 		this.createdBy = createdBy;
 		this.category = category;
+		this.createdAt = createdAt;
 	}
 
 	public Long getId() {
@@ -86,5 +91,13 @@ public class NewsArticle {
 
 	public void setCategory(String category) {
 		this.category = category;
+	}
+
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
 	}
 }

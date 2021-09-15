@@ -47,7 +47,6 @@ export class CategoryFormComponent implements OnInit {
     this.articleService
       .createCategory(data)
       .subscribe((data) => {
-        // TODO: close modal
         this.dialogRef.close()
       });
   }

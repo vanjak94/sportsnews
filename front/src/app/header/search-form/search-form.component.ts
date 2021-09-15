@@ -1,4 +1,4 @@
-import { ICategoryModel } from './../../news-article/models/category.model';
+import { ICategory } from './../../news-article/models/category.model';
 import { NewsArticleService } from './../../news-article/news-article.service';
 import { Component, OnInit } from '@angular/core';
 import { IFilterNewsArticlesDto } from '../../news-article/dtos/filter-news-articles-dto';
@@ -11,7 +11,7 @@ import { IFilterNewsArticlesDto } from '../../news-article/dtos/filter-news-arti
 export class SearchFormComponent implements OnInit {
   constructor(private articlesService: NewsArticleService) {}
 
-  categories?: ICategoryModel[];
+  categories?: ICategory[];
 
   searchFormData: IFilterNewsArticlesDto = {
     query: '',

@@ -1,6 +1,6 @@
 <app-user-form-modal></app-user-form-modal>
 
-<mat-card class="user-card" *ngFor="let user of users" (click)="openEditUserDialog(user)">
+<mat-card class="user-card" *ngFor="let user of users" (click)="this.currUser?.id === user.id ? null : openEditUserDialog(user)">
   <mat-card-title>{{ user.name }}</mat-card-title>
   <mat-card-content class="user-card-content">
     <mat-checkbox [checked]="user.isActive" [disableRipple]="true" (click)="$event.preventDefault()">Is active</mat-checkbox>

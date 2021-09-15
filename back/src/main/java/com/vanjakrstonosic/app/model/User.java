@@ -20,6 +20,8 @@ public class User {
 	private String password;
 	@Column(nullable = false)
 	private boolean isAdmin;
+	@Column(nullable = false)
+	private boolean isActive;
 
 	public User() {
 		super();
@@ -40,12 +42,20 @@ public class User {
 		this.name = name;
 	}
 
-	public boolean isAdmin() {
+	public boolean getIsAdmin() {
 		return isAdmin;
 	}
 
-	public void setAdmin(boolean isAdmin) {
+	public void setIsAdmin(boolean isAdmin) {
 		this.isAdmin = isAdmin;
+	}
+
+	public boolean getIsActive() {
+		return isActive;
+	}
+
+	public void setIsActive(boolean isActive) {
+		this.isActive = isActive;
 	}
 
 	public Long getId() {

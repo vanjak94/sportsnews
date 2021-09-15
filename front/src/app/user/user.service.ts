@@ -1,66 +1,53 @@
-import { ICreateUpdateUserDto } from './dtos/create-update-user.dto';
 import { IUser } from './models/user.model';
-import { of } from 'rxjs';
+import { Observable, Subject, ReplaySubject } from 'rxjs';
+import { ICreateUpdateUserDto } from './dtos/create-update-user.dto';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { config } from '../../config';
+
+const routes = {
+  users: `${config.backendUrl}/api/users`,
+  userById: `${config.backendUrl}/api/users/:id`,
+};
 
 @Injectable()
 export class UserService {
-  constructor(private http: HttpClient) {}
+  public userSubject: Subject<IUser[]>;
+  constructor(private http: HttpClient) {
+    this.userSubject = new ReplaySubject(1);
+    this.refetchUsers();
+  }
 
   getAll() {
-    return of<IUser[]>([
-      {
-        id: 44,
-        name: 'Vanja Krstonosic',
-        username: 'foo',
-        isAdmin: true,
-        isActive: true,
-      },
-      {
-        id: 11,
-        name: 'Banja KK',
-        isAdmin: true,
-        username: 'foo',
-        isActive: true,
-      },
-      {
-        id: 33,
-        name: 'Aiko Matic',
-        username: 'foo',
-        isAdmin: true,
-        isActive: true,
-      },
-    ]);
+    return this.userSubject;
   }
 
   getById(id: number) {
-    return of<IUser>({
-      id,
-      name: 'Vanja Krstonosic',
-      username: 'foo',
-      isAdmin: true,
-      isActive: true,
-    });
+    return this.http.get<IUser>(routes.userById.replace(':id', id.toString()));
   }
 
   create(data: ICreateUpdateUserDto) {
-    return of<IUser>({
-      id: 111,
-      username: 'foo',
-      name: data.name as string,
-      isAdmin: data.isAdmin as boolean,
-      isActive: true,
+    const observable = this.http.post<IUser>(routes.users, data);
+    observable.subscribe((user) => {
+      this.refetchUsers();
     });
+    return observable;
   }
 
   update(data: ICreateUpdateUserDto) {
-    return of<IUser>({
-      id: 111,
-      username: 'foo',
-      name: data.name as string,
-      isAdmin: !!data.isAdmin,
-      isActive: !!data.isActive,
+    const observable = this.http.put<IUser>(
+      routes.userById.replace(':id', data.id as unknown as string),
+      data
+    );
+    observable.subscribe((user) => {
+      this.refetchUsers();
+    });
+    return observable;
+  }
+
+  refetchUsers() {
+    this.http.get<IUser[]>(routes.users).subscribe((users) => {
+      this.userSubject.next(users);
     });
   }
 }
